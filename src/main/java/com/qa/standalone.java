@@ -61,15 +61,24 @@ public class standalone {
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         driver.findElement(By.xpath("//a[@class='cart-icon']")).click();
 
-       String productinfo = driver.findElement(By.xpath("//div[@class='cart-preview active']//div//div//p[@class='product-name']")).getText();
+        String productinfo = driver.findElement(By.xpath("//div[@class='cart-preview active']//div//div//p[@class='product-name']")).getText();
         System.out.println(productinfo);
 
+        driver.findElement(By.xpath("//button[contains(text(),'PROCEED TO CHECKOUT')]")).click();
 
-       //
 
-      //  driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/a[2]"));
+        String productname = driver.findElement(By.xpath("//p[@class='product-name']")).getText();
+        System.out.println(productname);
 
-      //  driver.findElement(By.xpath("//div[@class='cart-preview active']//div//div//p[@class='product-name'][contains(text(),'Brocolli - 1 Kg')]"));
+        String price =  driver.findElement(By.xpath("//td[4]//p[1]")).getText();
+        System.out.println(price);
+
+
+        // div[@class='cart-preview active']//div//div//li[@class='cart-item']
+
+        // driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/a[2]"));
+
+        // driver.findElement(By.xpath("//div[@class='cart-preview active']//div//div//p[@class='product-name'][contains(text(),'Brocolli - 1 Kg')]"));
     }
 
 }

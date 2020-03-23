@@ -2,6 +2,7 @@ package com.qa.testbase;
 
 import com.qa.utilities.TestUtils;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,11 +16,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 public class TestBase {
     public static WebDriver driver;
     protected static Properties prop;
     FileInputStream fileInputStream;
+    public static Logger Log;
 
     //Create a consturctor to read the properties from config file
 
@@ -42,8 +45,11 @@ public class TestBase {
     }
 
     @Parameters({"browser"})
-    @BeforeTest
-    public static void initializeBrowsers(String browser){
+    public void initializeBrowsers(String browser){
+
+        Log  = Logger.getLogger(getClass().getName());
+        PropertyConfigurator.configure("log4j.properties");
+
         try {
             if(browser.equals("chrome") || browser.equals("Chrome")){
                 WebDriverManager.chromedriver().setup();
@@ -52,11 +58,12 @@ public class TestBase {
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
             }else{
-                System.out.println("No browser has been initialized.");
+              Log.info("No browser has been initialized.");
             }
 
 
             driver.get(prop.getProperty("url"));
+            Log.info("Url has been launched.");
 
         }catch (Exception e){
             e.printStackTrace();
@@ -88,8 +95,8 @@ public class TestBase {
        return element.getAttribute(attribute);
     }
 
-    @AfterTest
-    public void afterTest(){
+
+    public void quiteDriver(){
         driver.quit();
     }
 }

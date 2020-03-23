@@ -26,6 +26,7 @@ public class HomePageTests extends TestBase {
     @Test(priority = 1)
     public void verifyHomePageLogo(){
         homePage.verifyLogo();
+
     }
 
     @Test(priority = 2)
@@ -33,12 +34,12 @@ public class HomePageTests extends TestBase {
         homePage.clickOnCartButton();
     }
 
-    @Test(priority = 3)
+    @Test(dependsOnMethods = "verifyCartButton")
     public void VerifyCartIcon() throws IOException {
         homePage.clickOnCartIcon();
     }
 
-  //  @Test
+   //  @Test
     public void verifySearch() throws IOException {
 
       String searchData = homePage.searchProductData("Cucumber");
@@ -53,22 +54,22 @@ public class HomePageTests extends TestBase {
 
     }
 
-    @Test(priority = 4)
+    @Test(dependsOnMethods = "VerifyCartIcon")
     public void verifyProductInfo(){
         prodcutName= homePage.cartInfo();
         System.out.println("Product name of the selected item is : " + prodcutName);
     }
 
-    @Test(priority = 5)
+    @Test(dependsOnMethods = "verifyProductInfo")
     public void verifyChecoutProceedButton(){
         try {
-            homePage.clickOnProceedToCheckoutButton();
+          cartPage = homePage.clickOnProceedToCheckoutButton();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @AfterClass
+   // @AfterClass
     public void tearDown(){
         driver.quit();
     }

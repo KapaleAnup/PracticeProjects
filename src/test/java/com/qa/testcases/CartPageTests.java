@@ -3,6 +3,7 @@ package com.qa.testcases;
 import com.qa.pages.CartPage;
 import com.qa.pages.HomePage;
 import com.qa.testbase.TestBase;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.io.IOException;
@@ -21,54 +22,91 @@ public class CartPageTests extends TestBase {
 
     @BeforeClass
     public void setUp() throws IOException {
-        initializeBrowsers("chrome");
         homePage = new HomePage();
         cartPage = new CartPage();
     }
 
 
-    @Test(priority = 1)
+    @Test
     public void getCurrentUrl(){
-      String currentUrl =  driver.getCurrentUrl();
-        System.out.println(currentUrl);
+
+        try {
+            String currentUrl =  driver.getCurrentUrl();
+            Log.info(currentUrl);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            Assert.fail(e.toString());
+        }
+
     }
 
-    @Test(priority = 2)
+    @Test
     public void verifyProdcutName(){
-       prodcutItemName = cartPage.checkProductName();
-        System.out.println("Product Name : " + prodcutItemName);
+        try{
+            prodcutItemName = cartPage.checkProductName();
+           Log.info("Product Name : " + prodcutItemName);
+        }catch (Exception e){
+            e.printStackTrace();
+            Assert.fail(e.toString());
+        }
+
     }
 
-    @Test(priority = 3)
+    @Test
     public void verifySelectedQuantity(){
-       qty  = cartPage.checkQuanityPrice();
-        System.out.println("Selected  qty : " + qty);
+
+        try{
+            qty  = cartPage.checkQuanityPrice();
+            Log.info("Selected  qty : " + qty);
+        }catch (Exception e){
+            e.printStackTrace();
+            Assert.fail(e.toString());
+        }
+
 
     }
 
-    @Test(priority = 4)
+    @Test
     public void verifyPrice(){
-        price = cartPage.checkQuanityPrice();
-        System.out.println("Product price : " + price);
+        try{
+            price = cartPage.checkQuanityPrice();
+            Log.info("Product price : " + price);
+        }catch (Exception e){
+            e.printStackTrace();
+            Assert.fail(e.toString());
+
+        }
+
     }
 
-    @Test(priority = 5)
+    @Test
     public void verifyTotalAmount(){
-        totalAmount = cartPage.checkTotalAmount();
-        System.out.println("Total amount is : " + totalAmount);
+        try {
+            totalAmount = cartPage.checkTotalAmount();
+            System.out.println("Total amount is : " + totalAmount);
+        }catch (Exception e){
+
+            e.printStackTrace();
+            Assert.fail(e.toString());
+
+        }
+
 
     }
 
-    @Test(priority = 6)
+    @Test(dependsOnMethods = "verifyTotalAmount")
     public void verifyPlaceOrder(){
-        cartPage.clickOnPlaceOrder();
-        System.out.println("Order has been placed successfully..");
+
+        try {
+            cartPage.clickOnPlaceOrder();
+            System.out.println("Order has been placed successfully..");
+        }catch (Exception e ){
+            e.printStackTrace();
+            Assert.fail(e.toString());
+        }
+
     }
-
-
-
-
-
 
 
     @AfterClass

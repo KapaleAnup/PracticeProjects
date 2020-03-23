@@ -49,6 +49,7 @@ public class HomePage  extends TestBase {
     public void clickOnCartIcon() {
         clickElement(cartIcon);
 
+
     }
     public boolean verifyLogo(){
 //       boolean flag= prodcutLogo.isDisplayed();

@@ -7,9 +7,8 @@
 
         <classes>
             <class name="com.qa.testcases.HomePageTests"/>
-            <class name="com.qa.testcases.CartPageTests"/>
+            <!--<class name="com.qa.testcases.CartPageTests"/>-->
 
         </classes>
-
     </test>
 </suite>

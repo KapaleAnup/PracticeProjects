@@ -21,7 +21,8 @@ import java.util.logging.Logger;
 public class TestBase {
     public static WebDriver driver;
     protected static Properties prop;
-    FileInputStream fileInputStream;
+   // FileInputStream fileInputStream;
+    InputStream fileInputStream ;
     public static Logger Log;
 
     //Create a consturctor to read the properties from config file
@@ -31,8 +32,7 @@ public class TestBase {
         try {
             prop = new Properties();
           //  String propFileName = "config.properties";
-
-         //   fileInputStream = (FileInputStream) getClass().getClassLoader().getResourceAsStream(propFileName);
+            String file = "config.properties";
             fileInputStream = new FileInputStream("/Users/anupkapale/Documents/PracticeProjects/src/main/java/com/qa/config/config.properties");
             prop.load(fileInputStream);
 
@@ -45,6 +45,7 @@ public class TestBase {
     }
 
     @Parameters({"browser"})
+    @BeforeTest
     public void initializeBrowsers(String browser){
 
         Log  = Logger.getLogger(getClass().getName());
@@ -74,28 +75,10 @@ public class TestBase {
 
     }
 
-    public void waitforVisibility(WebElement element){
-        WebDriverWait wait = new WebDriverWait(driver, TestUtils.WAIT);
-        wait.until(ExpectedConditions.visibilityOf(element));
-    }
-
-    public void clickElement(WebElement element){
-        waitforVisibility(element);
-        element.click();
-    }
-
-    public String sendKeys(WebElement element, String text){
-        waitforVisibility(element);
-        element.sendKeys(text);
-        return text;
-    }
-
-    public String getAttribute(WebElement element, String attribute){
-        waitforVisibility(element);
-       return element.getAttribute(attribute);
-    }
 
 
+
+    @BeforeTest
     public void quiteDriver(){
         driver.quit();
     }

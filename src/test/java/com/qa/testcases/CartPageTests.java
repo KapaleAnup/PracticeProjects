@@ -17,13 +17,17 @@ public class CartPageTests extends TestBase {
     private  static String qty;
     private  static String price;
     private  static String totalAmount;
+
     public CartPageTests() throws IOException {
+        super();
     }
 
     @BeforeClass
     public void setUp() throws IOException {
-        homePage = new HomePage();
+        initializeBrowsers("Chrome");
         cartPage = new CartPage();
+        homePage = new HomePage();
+
     }
 
 
@@ -31,7 +35,7 @@ public class CartPageTests extends TestBase {
     public void getCurrentUrl(){
 
         try {
-            String currentUrl =  driver.getCurrentUrl();
+            String currentUrl =  cartPage.getCurrentlUrl();
             Log.info(currentUrl);
 
         }catch (Exception e){
@@ -42,10 +46,11 @@ public class CartPageTests extends TestBase {
     }
 
     @Test
-    public void verifyProdcutName(){
+    public void verifyProductName(){
         try{
+
             prodcutItemName = cartPage.checkProductName();
-           Log.info("Product Name : " + prodcutItemName);
+            Log.info("Product Name : " + prodcutItemName);
         }catch (Exception e){
             e.printStackTrace();
             Assert.fail(e.toString());
@@ -69,6 +74,7 @@ public class CartPageTests extends TestBase {
 
     @Test
     public void verifyPrice(){
+        Log.info("Hi u there?");
         try{
             price = cartPage.checkQuanityPrice();
             Log.info("Product price : " + price);

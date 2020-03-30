@@ -1,6 +1,7 @@
 package com.qa.pages;
 
 import com.qa.testbase.TestBase;
+import com.qa.utilities.TestUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -8,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import java.io.IOException;
 
 public class HomePage  extends TestBase {
+
+    TestUtils testUtils = new TestUtils();
 
     @FindBy(xpath = "//div[@class=\"brand greenLogo\"]")
     private  WebElement prodcutLogo;
@@ -46,9 +49,9 @@ public class HomePage  extends TestBase {
     }
 
 
-    public void clickOnCartIcon() {
-        clickElement(cartIcon);
-
+    public HomePage clickOnCartIcon() {
+       testUtils.clickElement(cartIcon);
+       return this;
 
     }
     public boolean verifyLogo(){
@@ -63,32 +66,34 @@ public class HomePage  extends TestBase {
 //        return driver.getTitle();
 //    }
 
-    public String searchProductData(String data){
+    public HomePage searchProductData(String data){
         searchProduct.sendKeys(data);
         searchIcon.click();
      // sendKeys(searchProduct, data);
-        return data;
+        return this;
     }
 
     public boolean SearchedPrdocutName(){
 
       return productName.isDisplayed();
 
-      //  getAttribute(productName,text);
+ // testUtils.getAttribute(productName,"text");
 
     }
     public String cartInfo(){
         prodcutinfo.isDisplayed();
-         return prodcutinfo.getText();
+       return prodcutinfo.getAttribute("text");
+
 
     }
 
-    public void clickOnCartButton()  {
-        clickElement(clickOnAddCartButton);
+    public HomePage clickOnCartButton()  {
+        testUtils.clickElement(clickOnAddCartButton);
+        return this;
 
     }
     public CartPage clickOnProceedToCheckoutButton() throws IOException {
-        clickElement(checkoutButton);
+        testUtils.clickElement(checkoutButton);
         return new CartPage();
     }
 

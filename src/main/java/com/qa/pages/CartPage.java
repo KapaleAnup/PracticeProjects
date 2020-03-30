@@ -1,6 +1,7 @@
 package com.qa.pages;
 
 import com.qa.testbase.TestBase;
+import com.qa.utilities.TestUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -9,6 +10,7 @@ import java.io.IOException;
 
 public class CartPage extends TestBase {
 
+    TestUtils testUtils = new TestUtils();
 
     public CartPage() throws IOException {
         PageFactory.initElements(driver,this);
@@ -32,6 +34,9 @@ public class CartPage extends TestBase {
 
 
 
+    public String getCurrentlUrl(){
+        return driver.getCurrentUrl();
+    }
     public String checkProductName(){
        return productName.getText();
     }
@@ -49,7 +54,7 @@ public class CartPage extends TestBase {
     }
 
     public void clickOnPlaceOrder(){
-        clickElement(btnPlaceOrder);
+        testUtils.clickElement(btnPlaceOrder);
     }
 
 
